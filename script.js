@@ -1,5 +1,5 @@
 const getComputerChoice = function(){
-    randomNumber = Math.random() * 100
+    let randomNumber = Math.random() * 100
     if(randomNumber < 33){
 
         return "rock";
@@ -15,61 +15,101 @@ const getComputerChoice = function(){
 getComputerChoice();
 
 const getHumanChoice = function(){
-   popUp = prompt("ROCK, PAPER OR SCISSORS?")
+   let popUp = prompt("ROCK, PAPER OR SCISSORS?")
    return popUp;
 };
 
-getHumanChoice();
+// getHumanChoice();
 
-humanScore = 0;
-computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
+    
     let lowerCase = humanChoice.toLowerCase()
 
     if (lowerCase === computerChoice) {
-        console.log(`It's a tie! You: ${lowerCase} . Computer: ${computerChoice}`);
-        return "Tie"
+        return `It's a tie! You: ${lowerCase}. Computer: ${computerChoice}`;
+    //    return "Tie"
     }
     if((lowerCase === "rock" && computerChoice === "scissors")|| (lowerCase === "scissors"&& computerChoice === "paper")|| (lowerCase == "paper" && computerChoice === "rock")) {
-        console.log(`You win! ${lowerCase} beats ${computerChoice}.`);
-        return "Win!"
+        return `You win! ${lowerCase} beats ${computerChoice}.`;
+    //    return "Win!"
     } else {
-        console.log(`You lose! ${computerChoice} beats ${lowerCase}`);
-        return "Lose!"
+        return `You lose! ${computerChoice} beats ${lowerCase}` ;
+        // return "Lose!"
     }
 };
 
 function playGame(){
     let humanScore = 0;
     let computerScore = 0;
+    let resultMessages = [];
 
-    for (let round = 0; round < 5; round++) {
+    for (let round = 0; round < 3; round++) {
 
         let humanChoice = getHumanChoice();
         let computerChoice = getComputerChoice();
 
-        let result =playRound(humanChoice, computerChoice)
-        if(result === "Win!"){
+        let result =playRound(humanChoice, computerChoice);
+        resultMessages.push(result);
+
+        if(result.includes("Win!")){
             humanScore++
-        } else if(result === "Lose!"){
+        } else if(result.includes("Lose!")){
             computerScore++
         }
     };
 
-    console.log(`Final Score: you - ${humanScore}, Computer - ${computerScore}`);
+    resultMessages.push(`Final Score: you - ${humanScore}, Computer - ${computerScore}`);
     
 
     if(humanScore > computerScore){
-        console.log("You won the game!");
+        resultMessages.push("You won the game!");
     } else if(computerScore > humanScore){
-        console.log("Computer won the game!");
+        resultMessages.push("Computer won the game!");
     } else {
-        console.log("It's a tie!")
+        resultMessages.push("It's a tie!")
     }
+
+    return resultMessages.join('\n')
 };
 
-playGame();
+// playGame();
+
+
+const button1 = document.createElement("button")
+button1.textContent = "Play Game"
+button1.addEventListener(
+    'click', () => {
+        let resultDiv = document.createElement("div");
+        resultDiv.textContent = playGame();
+        document.body.appendChild(resultDiv)
+    }
+)
+document.body.appendChild(button1)
+
+
+const button2 = document.createElement("button")
+button2.textContent = "Play Game"
+button2.addEventListener(
+    'click', () => {
+        let resultDiv = document.createElement("div");
+        resultDiv.textContent = playGame();
+        document.body.appendChild(resultDiv)
+    }
+)
+document.body.appendChild(button2)
+
+const button3 = document.createElement("button")
+button3.textContent = "Play Game"
+button3.addEventListener(
+    'click', () => {
+        let resultDiv = document.createElement("div");
+        resultDiv.textContent = playGame();
+        document.body.appendChild(resultDiv)
+    }
+)
+document.body.appendChild(button3)
+
 
 
 
